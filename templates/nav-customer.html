@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #3498db;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: whitesmoke;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #1878b8;
+}
+
+.active {
+  background-color: red;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a href="#dashboard">Dashboard</a></li>
+  <li><a href="#reservasi">Reservasi</a></li>
+  <li><a href="#pesankamar">Pesan Kamar</a></li>
+  <li style="float:right"><a class="active" href="#about">Logout</a></li>
+</ul>
+
+</body>
+<div style="margin-top: 75px;"></div>
+</html>

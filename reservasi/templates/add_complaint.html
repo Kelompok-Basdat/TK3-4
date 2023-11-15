@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block meta %}
+    <title>Komplain</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .reservation-panel {
+            border: 1px solid #ddd; /* Tepi kotak */
+            padding: 20px; /* Jarak dalam kotak */
+            border-radius: 5px; /* Sudut bulat kotak */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan kotak */
+            background-color: white; /* Warna latar kotak */
+        }
+        input[disabled] {
+            color: #6c757d; /* Warna abu-abu untuk membuatnya terlihat tidak aktif */
+            background-color: #e9ecef; /* Warna latar belakang yang lebih terang */
+        }
+    </style>
+{% endblock meta %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center my-4">KOMPLAIN</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="reservation-panel">
+                    <form>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" class="form-control" id="email" value="ewinsper8@theguardian.com" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Nama:</label>
+                            <input type="text" class="form-control" id="nama" value="Enid Winsper" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama-hotel">Nama Hotel:</label>
+                            <input type="text" class="form-control" id="nama-hotel" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="cabang-hotel">Cabang Hotel:</label>
+                            <input type="text" class="form-control" id="cabang-hotel" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi">Deskripsi:</label>
+                            <textarea class="form-control" id="deskripsi" rows="3"></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

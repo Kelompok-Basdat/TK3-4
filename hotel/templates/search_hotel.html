@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block meta %}
+    <title>Hotel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{% endblock meta %}
+{% block content %}
+    {% include "nav-customer.html" %}
+    <div class="container">
+        <h2 class="text-center my-4">RESERVASI KAMAR HOTEL</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="reservation-panel">
+                    <form id="search-form">
+                        <div class="form-group">
+                            <label for="minimum">Minimum Price: </label>
+                            <input type="number" class="form-control" id="minimum" min="0" max="99999999999">
+                        </div>
+                        <div class="form-group">
+                            <label for="maximum">Maximum Price: </label>
+                            <input type="number" class="form-control" id="maximum" min="0" max="99999999999">
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="result-message">
+                
+                </div>
+            </div>
+                
+            
+        </div>
+    </div>
+    <div style="margin-top: 10px;"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#search-form").submit(function (event) {
+                event.preventDefault();
+    
+                // Get the values of minimum and maximum
+                var minimum = $("#minimum").val();
+                var maximum = $("#maximum").val();
+
+                if ((maximum < 2000) ) {
+                        $("#result-message").html("<h2 class=\"text-center my-4\">Tidak ada hotel yang sesuai</h2>");
+                    } else {
+                        var title = "<h2 class=\"text-center my-4\">List Hotel</h2>" 
+                        
+
+                        var result = `<table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <th scope="row">1</th>
+                                <td><a href='1'>The Westin</a></td>
+                                <td><p> Rating : 4.9 <p></td>
+                                </tr>
+                            </tbody>
+                            </table>`;
+
+                        $("#result-message").html(title + result);
+                    }
+
+            });
+        });
+    </script>
+{% endblock content %}

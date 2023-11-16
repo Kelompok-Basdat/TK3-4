@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block meta %}
+    <title>Hotel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{% endblock meta %}
+{% block content %}
+    {% include "nav-customer.html" %}
+    <div class="container">
+        <h2 class="text-center my-4">The Westin</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                        <td><p>Nama Hotel</p></td>
+                        <td><p> The Westin <p></td>
+                        </tr>
+
+                        <tr>
+                        <td><p>Deskripsi</p></td>
+                        <td><p> Hotel bagus dan keren <p></td>
+                        </tr>
+
+                        <tr>
+                        <td><p>NIB</p></td>
+                        <td><p> 5314666880956 <p></td>
+                        </tr>
+
+                        <tr>
+                        <td><p>Rating</p></td>
+                        <td><p>4.9<p></td>
+                        </tr>
+
+                        <tr>
+                        <td><p>Star</p></td>
+                        <td><p> 10 <p></td>
+                        </tr>
+
+                        <tr>
+                        <td><p>Alamat</p></td>
+                        <td><p>Jl. H. R. Rasuna Said No.Kav.C-22A, RT.2/RW.5, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940<p></td>
+                        </tr>
+
+                        <tr>
+                        <td><p>Min Check In</p></td>
+                        <td><p>14.00<p></td>
+                        </tr>
+
+                        <tr>
+                        <td><p>Max Check Out</p></td>
+                        <td><p>11.00<p></td>
+                        </tr>
+                    </tbody>
+                    </table>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              <th scope="col">Kamar Tersedia</th>
+                              <th scope="col">Fasilitas</th>
+                              <th scope="col">Harga per Malam</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            <tr>
+                            <td><p>401</p></td>
+                            <td><p> Wifi  <p>
+                                <p> Breakfast</p></td>
+                            <td><p> 100000 <p></td>
+                            <td><a class="btn btn-primary" href="#" role="button">RESERVASI</a></td>
+                            </tr>
+
+                            <tr>
+                                <td><p>402</p></td>
+                                <td><p> Wifi  <p>
+                                    <p> Breakfast</p>
+                                    <p> Laundry</p>
+                                    </td>
+                                <td><p> 120000 <p></td>
+                                <td><a class="btn btn-primary" href="#" role="button">RESERVASI</a></td>
+                                </tr>
+
+    
+                        </tbody>
+                        </table>
+            </div>
+                
+            
+        </div>
+    </div>
+    <div style="margin-top: 10px;"></div>
+
+{% endblock content %}

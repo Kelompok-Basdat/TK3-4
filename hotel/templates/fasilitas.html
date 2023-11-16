@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block meta %}
+    <title>Fasilitas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{% endblock meta %}
+{% block content %}
+    {% include "nav-hotel.html" %}
+    <div class="container">
+        <h2 class="text-center my-4">FASILITAS HOTEL</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-5  text-center">
+                <a class="btn btn-primary" href="fasilitas/create" role="button">+ TAMBAH FASILITAS</a>
+            </div>
+            <div class="col-md-10 mt-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                          <th scope="col">ID Fasilitas</th>
+                          <th scope="col">Nama Fasilitas</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                    <tbody>
+                        <tr>
+                        <td>1</td>
+                        <td>Wifi</td>
+                        <td><a class="btn btn-primary" href="fasilitas/update" role="button">UPDATE</a><br>
+                            <a class="btn btn-danger mt-1" href="#" role="button">HAPUS</a>
+                        </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Laundry</td>
+                            <td><a class="btn btn-primary" href="fasilitas/update" role="button">UPDATE</a><br>
+                                <a class="btn btn-danger mt-1" href="#" role="button">HAPUS</a>
+                            </td>
+                            </tr>
+
+
+                    </tbody>
+                    </table>
+            </div>
+                
+            
+        </div>
+    </div>
+    <div style="margin-top: 10px;"></div>
+
+{% endblock content %}

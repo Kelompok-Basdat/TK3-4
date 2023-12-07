@@ -22,9 +22,13 @@
                         </div>
                     </form>
                 </div>
-                <div id="result-message">
-                
-                </div>
+                {% if message %}
+    
+                    <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+
+                {% endif %}
             </div>
                 
             

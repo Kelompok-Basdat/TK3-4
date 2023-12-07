@@ -15,6 +15,7 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="minimum">Nama Sebelum: {{ facility }} </label>
+                            <input type="hidden" id="original_facility_name" value="{{ facility }}">
                             <br>
                             <label for="minimum">Nama Fasilitas: </label>
                             <input type="text" class="form-control" id="facility_name" name="facility_name">
@@ -23,9 +24,17 @@
                             <button type="submit" class="btn btn-primary">UPDATE</button>
                         </div>
                     </form>
-                </div>
-                <div id="result-message">
-                
+
+                    {% if message %}
+    
+                    <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+
+                    {% endif %}
+
+                    
+  
                 </div>
             </div>
                 
@@ -33,5 +42,21 @@
         </div>
     </div>
     <div style="margin-top: 10px;"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#search-form').submit(function(e) {
+                var originalName = $('#original_facility_name').val();
+                var newName = $('#facility_name').val();
+                if (originalName === newName) {
+                    // Prevent the form from submitting
+                    e.preventDefault();
+                    // Show the modal
+                    $('#sameNameModal').modal('show');
+                }
+                // If names are different, the form will submit normally
+            });
+        });
+        </script>
     
 {% endblock content %}

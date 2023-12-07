@@ -3,6 +3,7 @@ from django.db import connection, IntegrityError
 from collections import namedtuple
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.db.utils import InternalError
 
 def namedtuplefetchall(cursor):
     """Return all rows from a cursor as a namedtuple"""
@@ -37,14 +38,18 @@ def create_fasilitas_hotel(request, hotel_name, hotel_branch):
 
             facility = request.POST.get('facility_name')
 
-            with connection.cursor() as c:
-                c.execute("set search_path to sistel")
-                c.execute(f"""
-                INSERT INTO hotel_facilities(hotel_name, hotel_branch, facility_name)
-                VALUES ('{hotel_name}', '{hotel_branch}', '{facility}')
-                """)
+            try :
+
+                with connection.cursor() as c:
+                    c.execute("set search_path to sistel")
+                    c.execute(f"""
+                    INSERT INTO hotel_facilities(hotel_name, hotel_branch, facility_name)
+                    VALUES ('{hotel_name}', '{hotel_branch}', '{facility}')
+                    """)
 
                 return redirect(f'/hotel/fasilitas/{hotel_name}/{hotel_branch}')
+            except : 
+                return render(request, "create_fasilitas.html", {"message" : 'Fasilitas sudah terdaftar. Tidak boleh ada nama fasilitas yang sama.'})
 
     return render(request, "create_fasilitas.html", {})
 
@@ -54,20 +59,30 @@ def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
     if request.method == "POST":
 
             facility = request.POST.get('facility_name')
-            print(facility)
-            print(facilities)
-            print(hotel_name)
-            print(hotel_branch)
 
-            with connection.cursor() as c:
-                c.execute("set search_path to sistel")
-                c.execute(f"""
-                update hotel_facilities
-                set facility_name = '{facility}'
-                where hotel_name = '{hotel_name}' and hotel_branch = '{hotel_branch}' and facility_name = '{facilities}'
-                """)
+            try : 
+                with connection.cursor() as c:
+                    c.execute("set search_path to sistel")
+                    c.execute(f"""
+                    update hotel_facilities
+                    set facility_name = '{facility}'
+                    where hotel_name = '{hotel_name}' and hotel_branch = '{hotel_branch}' and facility_name = '{facilities}'
+                    """)
 
-            return redirect(f'/hotel/fasilitas/{hotel_name}/{hotel_branch}')
+                return redirect(f'/hotel/fasilitas/{hotel_name}/{hotel_branch}')
+        
+            except :
+                with connection.cursor() as c:
+                    c.execute("""set search_path to sistel""")
+                    c.execute(f"""
+                    select *
+                    from hotel_facilities
+                    where hotel_name = '{hotel_name}' and hotel_branch = '{hotel_branch}' and facility_name = '{facilities}'
+                    """)
+                    response = namedtuplefetchall(c)
+                    facility_temp = facilities
+
+                return render(request, "update_fasilitas.html", {"response" : response, "facility":facility_temp, "message" : 'Fasilitas sudah terdaftar. Tidak boleh ada nama fasilitas yang sama.'})
             
             
     with connection.cursor() as c:
@@ -80,7 +95,7 @@ def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
         response = namedtuplefetchall(c)
         facility_temp = facilities
 
-        return render(request, "update_fasilitas.html", {"response" : response, "facility":facility_temp})
+    return render(request, "update_fasilitas.html", {"response" : response, "facility":facility_temp})
     
 
 def delete_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):

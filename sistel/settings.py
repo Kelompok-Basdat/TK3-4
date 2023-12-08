@@ -79,11 +79,12 @@ WSGI_APPLICATION = 'sistel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'EcgcG5CGgE6b3B6B4EBaaGb-F16fddcb',
-        'HOST': 'viaduct.proxy.rlwy.net',
+        # 'HOST': '/cloudsql/toko-dizital:asia-southeast2:toko-dizital-instance',
+        'HOST' : 'viaduct.proxy.rlwy.net',
         'PORT': '57165',
     }
 }

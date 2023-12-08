@@ -11,19 +11,24 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="reservation-panel">
-                    <form id="search-form">
+                    <form id="search-form" action="" method="POST">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="minimum">Nama Fasilitas: </label>
-                            <input type="text" class="form-control" id="minimum">
+                            <input type="text" class="form-control" id="facility_name" name="facility_name" value="{{ facility_name }}">
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary">TAMBAH</button>
                         </div>
                     </form>
                 </div>
-                <div id="result-message">
-                
-                </div>
+                {% if message %}
+    
+                    <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+
+                {% endif %}
             </div>
                 
             

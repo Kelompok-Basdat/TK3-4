@@ -27,7 +27,7 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="reservationID">ID Reservasi:</label>
-                            <input type="text" class="form-control" id="reservationID" value="4235" disabled>
+                            <input type="text" class="form-control" id="rsv-id" value="{{rsv_id}}" name="rsv_id" readonly>
                         </div>
                         <div class="form-group">
                             <label for="vehicle">Kendaraan:</label>
@@ -47,14 +47,20 @@
     </div>
     <script>
         function addShuttle() {
-            var form = this.form
-            alert(form.elements['vehicle'].value)
-            fetch("{% url 'reservasi:reservation_submit' %}", {
+            var form = this.form;
+            fetch("{% url 'reservasi:add_shuttle_submit' %}", {
                 method: "POST",
                 body: new FormData(this.form)
-            }).then(refreshProducts)
-
-            document.getElementById("form").reset()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "error") {
+                    alert(data.message);
+                } else {
+                    alert("Kamu berhasil memesan shuttle service!")
+                    document.getElementById("form").reset()
+                }
+            })
             return false
         }
         document.getElementById("btn-submit").onclick = addShuttle

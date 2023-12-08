@@ -24,28 +24,29 @@
             <div class="col-md-6">
                 <div class="reservation-panel">
                     <form>
+                        <input type="hidden" name="rsv_id" value="{{ rsv_id }}">
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="text" class="form-control" id="email" value="ewinsper8@theguardian.com" disabled>
+                            <input type="text" class="form-control" id="email" value="{{email}}" name="email" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama:</label>
-                            <input type="text" class="form-control" id="nama" value="Enid Winsper" disabled>
+                            <input type="text" class="form-control" id="nama" value="{{nama_user}}" name="nama" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nama-hotel">Nama Hotel:</label>
-                            <input type="text" class="form-control" id="nama-hotel" value="">
+                            <input type="text" class="form-control" id="nama-hotel" value="{{nama_hotel}}" name="nama_hotel" readonly>
                         </div>
                         <div class="form-group">
                             <label for="cabang-hotel">Cabang Hotel:</label>
-                            <input type="text" class="form-control" id="cabang-hotel" value="">
+                            <input type="text" class="form-control" id="cabang-hotel" value="{{cabang_hotel}}" name="cabang_hotel" readonly>
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi:</label>
-                            <textarea class="form-control" id="deskripsi" rows="3"></textarea>
+                            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -53,4 +54,24 @@
         </div>
     </div>
     <div style="margin-top: 10px;"></div>
+    <script>
+        function addShuttle() {
+            var form = this.form;
+            fetch("{% url 'reservasi:complaint_submit' %}", {
+                method: "POST",
+                body: new FormData(this.form)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "error") {
+                    alert(data.message);
+                } else {
+                    alert("Kamu berhasil mengajukan komplain!")
+                    document.getElementById("form").reset()
+                }
+            })
+            return false
+        }
+        document.getElementById("btn-submit").onclick = addShuttle
+    </script>
 {% endblock content %}

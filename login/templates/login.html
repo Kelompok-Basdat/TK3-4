@@ -86,15 +86,35 @@
     <form id="loginForm">
         <h2>Login</h2>
         <label for="loginEmail">Email:</label>
-        <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp">
 
         <label for="loginPassword">Password:</label>
-        <input type="password" class="form-control" name="password">
+        <input type="password" class="form-control" name="password" id="password">
 
-        <input type="submit" value="Login" class="btn btn-secondary">
-        <p class="switch">Don't have an account? <a href="#" onclick="Registrasi_User()">Register</a></p>
+        <input type="submit" value="Login" class="btn btn-secondary" id="btn-submit">
+        <p class="switch">Don't have an account? <a href="{% url 'login:show_landingpage' %}" onclick="Registrasi_User()">Register</a></p>
         
     </form>
 
 </body>
+<script>
+    function login() {
+        var form = this.form;
+        fetch("{% url 'login:login_submit' %}", {
+            method: "POST",
+            body: new FormData(this.form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === "error") {
+                alert(data.message);
+            } else {
+                alert("Kamu berhasil login!")
+                document.getElementById("form").reset()
+            }
+        })
+        return false
+    }
+    document.getElementById("btn-submit").onclick = login
+</script>
 </html>

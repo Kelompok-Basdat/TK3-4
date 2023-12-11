@@ -134,16 +134,20 @@ def complaint_submit(request):
 
 def add_review(request):
     # TODO: ngehubungin data aslinya
-    email = 'ewinsper8@theguardian.com' # masih data dummy
-    nama = 'Enid Winsper' # masih data dummy
-    hotel_name = 'Ibis' # masih data dummy
-    hotel_branch = 'Bandung' # masih data dummy
-    context = {
-        'email' : email,
-        'nama' : nama,
-        'hotel_name' : hotel_name,
-        'hotel_branch' : hotel_branch,
-    }
+    with conn.cursor() as cursor:
+        cursor.execute('set search_path to public;')
+        email = request.session['user']
+        cursor.execute('set search_path to sistel;')
+        cursor.execute('select concat(fname, \' \', lname) from sistel.user where email = %s;', (email, ))
+        nama = cursor.fetchone()[0]
+        hotel_name = 'Ibis' # masih data dummy
+        hotel_branch = 'Bandung' # masih data dummy
+        context = {
+            'email' : email,
+            'nama' : nama,
+            'hotel_name' : hotel_name,
+            'hotel_branch' : hotel_branch,
+        }
     return render(request, "add_review.html", context)
 
 @csrf_exempt

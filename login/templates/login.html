@@ -99,6 +99,7 @@
 </body>
 <script>
     function login() {
+        event.preventDefault();
         var form = this.form;
         fetch("{% url 'login:login_submit' %}", {
             method: "POST",
@@ -110,7 +111,8 @@
                 alert(data.message);
             } else {
                 alert("Kamu berhasil login!")
-                document.getElementById("form").reset()
+                this.form.reset()
+                window.location.href = "{% url 'reservasi:add_shuttle' %}"
             }
         })
         return false

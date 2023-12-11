@@ -2,8 +2,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import connection as conn
-from django.http import HttpResponseNotFound
+from django.http import (HttpResponseNotFound, HttpResponseRedirect,
+                         JsonResponse)
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -14,34 +16,33 @@ def show_landingpage(request):
 
 
 def login_user(request):
+    if 'user' in request.session:
+        return redirect('reservasi:add_shuttle')
     return render(request, 'login.html', {})
 
 @csrf_exempt
 def login(request):
-    print(69)
     if request.method == 'POST':
-        username = request.POST['email']
+        email = request.POST['email']
         password = request.POST['password']
-        print(username, password)
-        # user = authenticate(request, username=username, password=password)
-
-        # if user is not None:
-        #     login(request, user)
-        #     if user.groups.filter(name='Admin').exists():
-        #         return redirect('admin_dashboard')
-        #     elif user.groups.filter(name='Customer').exists():
-        #         return redirect('Customer_dashboard')
-        #     elif user.groups.filter(name='Hotel').exists():
-        #         return redirect('Hotel_dashboard')
-        #     else:
-        #         # Handle other roles or default redirect
-        #         return redirect('home')
-        # else:
-        #     messages.error(request, "Invalid Account")
-        #     return redirect('login')
+        print(email, password)
+        with conn.cursor() as cursor:
+            cursor.execute("set search_path to sistel;")
+            cursor.execute("select * from sistel.user where email=%s;", (email,))
+            user = cursor.fetchone()
+            print(user)
+            if not user or user[1] != password:
+                return JsonResponse({"status": "error", "message": "Invalid Username or Password"})
+            else:
+                print(69)
+                cursor.execute("set search_path to public;")
+                request.session['user'] = email
+                return JsonResponse({"status": "success"})
+                
     return HttpResponseNotFound()
 
 def logout_user(request):
-	logout(request)
-	messages.success(request, ("You Were Logged Out!"))
-	return redirect('home')
+    if 'user' in request.session:
+        del request.session['user']
+    messages.success(request, ("You Were Logged Out!"))
+    return redirect('login:show_landingpage')

@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
-from django.db import connection, IntegrityError
 from collections import namedtuple
-from django.views.decorators.csrf import csrf_exempt
+
 from django.contrib import messages
+from django.db import IntegrityError, connection
 from django.db.utils import InternalError
+from django.shortcuts import redirect, render
+from django.views.decorators.csrf import csrf_exempt
+
 
 def namedtuplefetchall(cursor):
     """Return all rows from a cursor as a namedtuple"""

@@ -35,22 +35,32 @@
         .button-container {
             margin-top: 20px;
         }
-
+        
         .button {
-            display: inline-block;
-            width: 80px; /* Set a fixed width for the buttons */
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 0 10px;
-            text-decoration: none;
+            display: inline-block; /* Mengubah elemen menjadi inline-block */
+            text-align: center; /* Mengatur teks ke tengah secara horizontal */
+            vertical-align: middle; /* Mengatur teks ke tengah secara vertikal */
+            line-height: normal; /* Mengatur tinggi baris teks normal */
+            padding: 10px 20px; /* Sesuaikan dengan kebutuhan Anda */
+            text-decoration: none; /* Menghapus garis bawah default pada tautan */
+            border: 1px solid #ccc; /* Tambahkan border sesuai dengan kebutuhan Anda */
+            background-color: #3498db; /* Tambahkan warna latar belakang sesuai dengan kebutuhan Anda */
+            color: #ffffff; /* Tambahkan warna teks sesuai dengan kebutuhan Anda */
+            font-weight: bold; /* Sesuaikan dengan kebutuhan Anda */
+            border-radius: 5px; /* Tambahkan border-radius sesuai dengan kebutuhan Anda */
         }
 
         .button:hover {
             background-color: #1878b8;
+        }
+        .messages-container {
+            text-align: center; /* Mengatur teks ke tengah secara horizontal */
+        }
+
+        .messages {
+            list-style-type: none; /* Menghapus tanda bullet dari list */
+            padding: 0; /* Menghapus padding default dari list */
+            margin: 0; /* Menghapus margin default dari list */
         }
 
     </style>
@@ -58,6 +68,13 @@
 
 <body>
     <div class="container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <h1>Welcome to Sistel</h1>
         <p>Choose an option:</p>
         <div class="button-container">

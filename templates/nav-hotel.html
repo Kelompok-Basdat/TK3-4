@@ -37,9 +37,9 @@ li a:hover:not(.active) {
 <body>
 
 <ul>
-  <li><a href="#dashboard">Dashboard</a></li>
+  <li><a href="/dashboard/">Dashboard</a></li>
   <li><a href="#kamar">Kamar</a></li>
-  <li><a href="#fasillitas">Fasilitas</a></li>
+  <li><a href="/hotel/fasilitas/{{request.session.hotel_name}}/{{request.session.hotel_branch}}">Fasilitas</a></li>
   <li><a href="#reservasiList">List Reservasi</a></li>
   <li style="float:right"><a class="active" href="{% url 'login:logout' %}">Logout</a></li>
 </ul>

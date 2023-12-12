@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'reservasi',
     'hotel',
     'login',
+    'cr_pengguna',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +86,6 @@ DATABASES = {
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'EcgcG5CGgE6b3B6B4EBaaGb-F16fddcb',
-        # 'HOST': '/cloudsql/toko-dizital:asia-southeast2:toko-dizital-instance',
         'HOST' : 'viaduct.proxy.rlwy.net',
         'PORT': '57165',
     }

@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block meta %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock meta %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #d9edf7; /* Changed body background color */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+        
+        .button {
+            display: inline-block; /* Mengubah elemen menjadi inline-block */
+            text-align: center; /* Mengatur teks ke tengah secara horizontal */
+            vertical-align: middle; /* Mengatur teks ke tengah secara vertikal */
+            line-height: normal; /* Mengatur tinggi baris teks normal */
+            padding: 10px 20px; /* Sesuaikan dengan kebutuhan Anda */
+            text-decoration: none; /* Menghapus garis bawah default pada tautan */
+            border: 1px solid #ccc; /* Tambahkan border sesuai dengan kebutuhan Anda */
+            background-color: #3498db; /* Tambahkan warna latar belakang sesuai dengan kebutuhan Anda */
+            color: #ffffff; /* Tambahkan warna teks sesuai dengan kebutuhan Anda */
+            font-weight: bold; /* Sesuaikan dengan kebutuhan Anda */
+            border-radius: 5px; /* Tambahkan border-radius sesuai dengan kebutuhan Anda */
+        }
+
+        .button:hover {
+            background-color: #1878b8;
+        }
+        .messages-container {
+            text-align: center; /* Mengatur teks ke tengah secara horizontal */
+        }
+
+        .messages {
+            list-style-type: none; /* Menghapus tanda bullet dari list */
+            padding: 0; /* Menghapus padding default dari list */
+            margin: 0; /* Menghapus margin default dari list */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <h1>Welcome to Sistel</h1>
+        <p>Choose an option:</p>
+        <div class="button-container">
+            <a href="/login/" class="button">Login</a>
+            <a href="/register/" class="button" style="">Register</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -58,7 +58,9 @@
                     alert(data.message);
                 } else {
                     alert("Kamu berhasil memesan shuttle service!")
-                    document.getElementById("form").reset()
+                    this.form.reset()
+                    // TODO: window.location.href =
+                    window.location.reload()
                 }
             })
             return false

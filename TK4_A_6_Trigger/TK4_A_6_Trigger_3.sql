@@ -1,18 +1,30 @@
-CREATE OR REPLACE FUNCTION nama_function()
+CREATE OR REPLACE FUNCTION cek_add_kamar()
 RETURNs trigger AS
 $$
-DECLARE
-    nama_var1 type_var1;
-    nama_var2 type_var2;
 BEGIN
-    -- IF() THEN
-    --     RAISE EXCEPTION '';
-    -- END IF;
-    -- RETURN NEW;
+    IF(NEW.floor <= 0) THEN
+        RAISE EXCEPTION 'Nomor lantai harus bilangan positif di atas 0!';
+    END IF;
+    IF(NEW.price <= 0) THEN
+        RAISE EXCEPTION 'Harga kamar harus bilangan positif di atas 0!';
+    END IF;
+    RETURN NEW;
 END;
 $$
 language plpgsql;
 
-CREATE TRIGGER nama_trigger
-AFTER INSERT ON nama_tabel
-FOR EACH ROW EXECUTE PROCEDURE nama_function();
+CREATE TRIGGER trigger_cek_add_kamar
+BEFORE INSERT ON room
+FOR EACH ROW EXECUTE PROCEDURE cek_add_kamar();
+
+CREATE OR REPLACE FUNCTION cek_del_kamar()
+RETURNs trigger AS
+$$
+BEGIN
+    IF(EXISTS(select * from reservation_room where rnum = OLD.number and isactive = true)) THEN
+        RAISE EXCEPTION 'Tidak dapat menghapus kamar tersebut karena masih terdaftar dalam reservasi aktif!';
+    END IF;
+    RETURN NEW;
+END;
+$$
+language plpgsql;

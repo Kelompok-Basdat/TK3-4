@@ -47,7 +47,7 @@
 </head>
 <body>
 
-<form id="registrationForm" action="register.php" method="post">
+<form id="registrationForm" action="" method="POST">
     <h2>Register - Customer or Hotel</h2>
 
     <!-- Role Selection -->
@@ -57,27 +57,15 @@
         <option value="hotel">Hotel</option>
     </select>
 
-    <!-- Customer Registration Form -->
     <div id="customerForm">
         <h3>Register - Customer</h3>
-        <label for="customerEmail">Email:</label>
-        <input type="email" id="customerEmail" name="customerEmail" required>
-
-        <!-- Add other customer fields here -->
-
-        <button type="submit">Register</button>
     </div>
 
-    <!-- Hotel Registration Form -->
     <div id="hotelForm" style="display: none;">
         <h3>Register - Hotel</h3>
-        <label for="hotelEmail">Email:</label>
-        <input type="email" id="hotelEmail" name="hotelEmail" required>
-
-        <!-- Add other hotel fields here -->
-
-        <button type="submit">Register</button>
     </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
 </form>
 
 <script>

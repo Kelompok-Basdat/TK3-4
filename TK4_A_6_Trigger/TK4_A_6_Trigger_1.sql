@@ -11,5 +11,5 @@ $$
 language plpgsql;
 
 CREATE TRIGGER trigger_cek_password
-AFTER INSERT ON sistel.user
+BEFORE INSERT ON sistel.user
 FOR EACH ROW EXECUTE PROCEDURE cek_password();

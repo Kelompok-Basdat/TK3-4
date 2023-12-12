@@ -30,19 +30,22 @@ def login(request):
             cursor.execute("set search_path to sistel;")
             cursor.execute("select * from sistel.user where email=%s;", (email,))
             user = cursor.fetchone()
-            print(user)
             if not user or user[1] != password:
-                return JsonResponse({"status": "error", "message": "Invalid Username or Password"})
+                return JsonResponse({"status": "error", "message": "Invalid Email or Password"})
             else:
-                print(69)
                 cursor.execute("set search_path to public;")
                 request.session['user'] = email
+                cursor.execute('select hotel_name, hotel_branch from sistel.hotel where email = %s' , (email,))
+                res = cursor.fetchone()
+                if res:
+                    request.session['hotel_name'] = res[0]
+                    request.session['hotel_branch'] = res[1]
                 return JsonResponse({"status": "success"})
                 
     return HttpResponseNotFound()
 
 def logout_user(request):
     if 'user' in request.session:
-        del request.session['user']
+        request.session.flush()
     messages.success(request, ("You Were Logged Out!"))
     return redirect('login:show_landingpage')

@@ -92,7 +92,7 @@
         <input type="password" class="form-control" name="password" id="password">
 
         <input type="submit" value="Login" class="btn btn-secondary" id="btn-submit">
-        <p class="switch">Don't have an account? <a href="{% url 'login:show_landingpage' %}" onclick="Registrasi_User()">Register</a></p>
+        <p class="switch">Don't have an account? <a href="/register/" onclick="Registrasi_User()">Register</a></p>
         
     </form>
 
@@ -112,7 +112,7 @@
             } else {
                 alert("Kamu berhasil login!")
                 this.form.reset()
-                window.location.href = "{% url 'reservasi:add_shuttle' %}"
+                window.location.href = "{% url 'dashboard:show_dashboard' %}"
             }
         })
         return false

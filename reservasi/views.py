@@ -35,7 +35,6 @@ def add_shuttle(request):
 
         for i in range(len(results)):
             results[i] = results[i][0]
-        print(69)
         if not results:
             results = ["Mohon maaf, semua kendaraan sedang terpakai.",]
         # TODO: connect reservation idnya
@@ -52,7 +51,6 @@ def add_shuttle_submit(request):
     if request.method == 'POST':
         rsv_id = request.POST.get('rsv_id')
         vehicle_selected = request.POST.get('vehicle')
-        print("Selected Vehicle:", vehicle_selected)
         if vehicle_selected is not None:
             with conn.cursor() as cursor:
                 cursor.execute('set search_path to sistel;')
@@ -63,7 +61,6 @@ def add_shuttle_submit(request):
                         """
                 cursor.execute(query,(vehicle_selected,))
                 result = cursor.fetchall()[0]
-                print(result)
                 query = f"""
                         insert into reservation_shuttleservice (rsv_id,driver_phonenum,vehicle_num,datetime,isactive)
                         values (%s,%s,%s,%s,%s)
@@ -118,7 +115,6 @@ def complaint_submit(request):
             while (str(id),) in ids:
                 id += 1
             id = str(id)
-            print(ids, id)
             query = f"""
                     insert into complaints (id,cust_email,rv_id,complaint)
                     values (%s,%s,%s,%s)
@@ -167,7 +163,6 @@ def review_submit(request):
             while (str(id),) in ids:
                 id += 1
             id = str(id)
-            print(ids, id)
             query = f"""
                     insert into reviews (cust_email, id, rating, review, hotel_name, hotel_branch)
                     values (%s,%s,%s,%s,%s,%s)

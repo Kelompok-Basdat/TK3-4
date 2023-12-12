@@ -14,7 +14,9 @@ def namedtuplefetchall(cursor):
     return [nt_result(*row) for row in cursor.fetchall()]
 
 
-def fasilitas_hotel(request, hotel_name, hotel_branch):
+def fasilitas_hotel(request, hotel_name:str, hotel_branch:str):
+    hotel_name = hotel_name.title()
+    hotel_branch = hotel_branch.title()
     with connection.cursor() as c:
         c.execute("""set search_path to sistel""")
         c.execute(f"""
@@ -25,6 +27,7 @@ def fasilitas_hotel(request, hotel_name, hotel_branch):
         response = namedtuplefetchall(c)
 
         hotel_branch = response[0][1]
+        c.execute("""set search_path to public""")
         return render(request, "fasilitas.html", {"response":response, "hotel_brach":hotel_branch})
 
 # Create your views here.
@@ -41,15 +44,15 @@ def create_fasilitas_hotel(request, hotel_name: str, hotel_branch:str):
             facility = request.POST.get('facility_name')
 
             try :
-                hotel_name = hotel_name.capitalize()
-                hotel_branch = hotel_branch.capitalize()
+                hotel_name = hotel_name.title()
+                hotel_branch = hotel_branch.title()
                 with connection.cursor() as c:
                     c.execute("set search_path to sistel")
                     c.execute(f"""
                     INSERT INTO hotel_facilities(hotel_name, hotel_branch, facility_name)
                     VALUES ('{hotel_name}', '{hotel_branch}', '{facility}')
                     """)
-
+                    c.execute("""set search_path to public""")
                 return redirect(f'/hotel/fasilitas/{hotel_name}/{hotel_branch}')
             except Exception as e:
                 print(e)
@@ -60,6 +63,8 @@ def create_fasilitas_hotel(request, hotel_name: str, hotel_branch:str):
 
 
 def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
+    hotel_name = hotel_name.title()
+    hotel_branch = hotel_branch.title()
     if request.method == "POST":
 
             facility = request.POST.get('facility_name')
@@ -72,7 +77,7 @@ def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
                     set facility_name = '{facility}'
                     where hotel_name = '{hotel_name}' and hotel_branch = '{hotel_branch}' and facility_name = '{facilities}'
                     """)
-
+                    c.execute("""set search_path to public""")
                 return redirect(f'/hotel/fasilitas/{hotel_name}/{hotel_branch}')
         
             except Exception as e:
@@ -85,7 +90,7 @@ def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
                     """)
                     response = namedtuplefetchall(c)
                     facility_temp = facilities
-
+                    c.execute("""set search_path to public""")
                 return render(request, "update_fasilitas.html", {"response" : response, "facility":facility_temp, "message" : str(e).split('\n')[0]})
             
             
@@ -98,11 +103,13 @@ def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
         """)
         response = namedtuplefetchall(c)
         facility_temp = facilities
-
+        c.execute("""set search_path to public""")
     return render(request, "update_fasilitas.html", {"response" : response, "facility":facility_temp})
     
 
 def delete_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
+    hotel_branch = hotel_branch.title()
+    hotel_name = hotel_name.title()
             
     with connection.cursor() as c:
         c.execute("""set search_path to sistel""")
@@ -110,7 +117,7 @@ def delete_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
         delete from hotel_facilities
         where hotel_name = '{hotel_name}' and hotel_branch = '{hotel_branch}' and facility_name = '{facilities}'
         """)
-
+        c.execute("""set search_path to public""")
         return redirect(f'/hotel/fasilitas/{hotel_name}/{hotel_branch}')
 
     

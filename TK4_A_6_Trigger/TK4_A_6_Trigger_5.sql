@@ -31,9 +31,10 @@ BEGIN
     from reservation_status
     where NEW.rsid = id;
 
-    IF(last_status != 'Menunggu Konfirmasi Pihak Hotel') THEN
-        RAISE EXCEPTION 'Hanya dapat mengubah status dari ''Menunggu Konfirmasi Pihak Hotel''';
-        IF(new_status not in ('Ditolak oleh Hotel','Terkonfirmasi oleh Hotel','Dibatalkan Customer')) THEN
+    IF(new_status != 'Dibatalkan Customer') THEN
+        IF(last_status != 'Menunggu Konfirmasi Pihak Hotel') THEN
+            RAISE EXCEPTION 'Hanya dapat mengubah status dari ''Menunggu Konfirmasi Pihak Hotel''';
+        ELSIF(new_status not in ('Ditolak oleh Hotel','Terkonfirmasi oleh Hotel')) THEN
             RAISE EXCEPTION 'Hanya dapat mengubah status ke ''Ditolak oleh Hotel'' atau ''Terkonfirmasi oleh Hotel''';
         END IF;
     END IF;
@@ -43,5 +44,5 @@ $$
 language plpgsql;
 
 CREATE TRIGGER trigger_update_status
-AFTER INSERT OR UPDATE ON reservation_status_history
+AFTER INSERT ON reservation_status_history
 FOR EACH ROW EXECUTE PROCEDURE cek_update_status();

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block meta %}
+<title>Hotel Dashboard</title>
+<style>
+  .dashboard-container {
+    width: 60%; /* Adjust the width as per your layout requirements */
+    margin: 50px auto; /* Center the dashboard on the page with margin from top */
+    padding: 40px; /* Padding inside the container */
+    background: #fff; /* White background */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Stylish font */
+  }
+  .dashboard-header {
+    text-align: center; /* Center the title */
+    margin-bottom: 30px; /* Space below the header */
+    color: #333; /* Dark grey color for the text for readability */
+    padding-bottom: 10px; /* Space between title and content */
+    border-bottom: 2px solid #4CAF50; /* Accent color for the header underline */
+  }
+  .dashboard-info {
+    line-height: 1.8; /* Space between lines */
+    color: #555; /* Grey color for text for less intensity */
+  }
+  .dashboard-info div {
+    margin-bottom: 20px; /* Space between info items */
+  }
+  .dashboard-info label {
+    font-weight: bold; /* Bold for labels */
+    display: block; /* Block display for labels */
+    margin-bottom: 5px; /* Space between label and content */
+  }
+  .dashboard-info span {
+    display: block; /* Each info content on its own line */
+    font-size: 16px; /* Readable font size */
+  }
+</style>
+{% endblock meta %}
+{% block content %}
+{% include 'nav-hotel.html' %}
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Hotel Dashboard</h1>
+  </div>
+  <div class="dashboard-info">
+    <div>
+      <label>Nama Pemilik Hotel:</label>
+      <span>{{nama}}</span>
+    </div>
+    <div>
+      <label>Nomor HP:</label>
+      <span>{{phonenum}}</span>
+    </div>
+    <div>
+      <label>Email:</label>
+      <span>{{email}}</span>
+    </div>
+    <div>
+      <label>Nomor Izin Usaha:</label>
+      <span>{{nib}}</span>
+    </div>
+    <div>
+      <label>Nama Hotel:</label>
+      <span>{{nama_hotel}}</span>
+    </div>
+    <div>
+      <label>Alamat Hotel:</label>
+      <span>{{alamat}}</span>
+    </div>
+  </div>
+  <h5>List Fasilitas:</h5>
+  <table class="table">
+    <thead>
+        <tr>
+          <th scope="col">ID Fasilitas</th>
+          <th scope="col">Nama Fasilitas</th>
+        </tr>
+      </thead>
+    <tbody>
+        {% for res in response %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{res}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <h5>List Kamar:</h5>
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">Nomor Kamar</th>
+              <th scope="col">Harga</th>
+              <th scope="col">Lantai</th>
+              <th scope="col">Daftar Fasilitas</th>
+            </tr>
+          </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                {% for x in room %}
+                <td>{{x}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+</div>
+{% endblock content %}

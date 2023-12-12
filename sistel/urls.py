@@ -22,4 +22,7 @@ urlpatterns = [
     path('reservasi/',include('reservasi.urls')),
     path('hotel/',include('hotel.urls')),
     path('Han/', include('Han.urls')),
+    path('',include('login.urls')),
+    path('register/',include('cr_pengguna.urls')),
+    path('dashboard/',include('dashboard.urls')),
 ]

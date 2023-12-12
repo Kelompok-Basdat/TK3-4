@@ -67,7 +67,9 @@
                     alert(data.message);
                 } else {
                     alert("Kamu berhasil mengajukan komplain!")
-                    document.getElementById("form").reset()
+                    this.form.reset()
+                    // TODO: window.location.href =
+                    location.reload()
                 }
             })
             return false

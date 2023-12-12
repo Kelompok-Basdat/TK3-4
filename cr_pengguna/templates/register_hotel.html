@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block meta %}
+<title>User Registration</title>
+<style>
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Change to column layout */
+        align-items: center;
+    }
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh; /* Apply the min-height to the container */
+        width: 100%;
+    }
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        margin: 20px; /* Add some margin to the form */
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px; /* Atau sesuaikan sesuai dengan spacing di gambar */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        background-color: #4CAF50; /* Warna hijau Bootstrap */
+        color: white;
+        margin-top: 10px; /* Atur margin atas sesuai dengan gambar */
+    }
+</style>
+{% endblock meta %}
+{% block content %}
+
+<form id="registrationForm" action="" method="POST">
+    <h2>Register - Hotel</h2>
+
+    <div class="form-group">
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Password:</label>
+        <input type="password" id="Password" name="Password" required>
+    </div>
+
+    <div class="form-group">
+        <label for="OwnerFirstName">Nama Depan Pemilik Hotel:</label>
+        <input type="text" id="OwnerFirstName" name="OwnerFirstName" required>
+    </div>
+
+    <div class="form-group">
+        <label for="OwnerLastName">Nama Belakang Pemilik Hotel:</label>
+        <input type="text" id="OwnerLastName" name="OwnerLastName" required>
+    </div>
+
+    <div class="form-group">
+        <label for="OwnerPhoneNumber">Nomor HP Pemilik Hotel:</label>
+        <input type="tel" id="OwnerPhoneNumber" name="OwnerPhoneNumber" required>
+    </div>
+
+    <div class="form-group">
+        <label for="BusinessLicenseNumber">Nomor Izin Usaha:</label>
+        <input type="text" id="BusinessLicenseNumber" name="BusinessLicenseNumber" required>
+    </div>
+
+    <div class="form-group">
+        <label for="HotelName">Nama Hotel:</label>
+        <input type="text" id="HotelName" name="HotelName" required>
+    </div>
+
+    <div class="form-group">
+        <label for="HotelBranch">Cabang Hotel:</label>
+        <input type="text" id="HotelBranch" name="HotelBranch" required>
+    </div>
+
+    <div class="form-group">
+        <label for="HotelStreet">Nama Jalan:</label>
+        <input type="text" id="HotelStreet" name="HotelStreet" required>
+    </div>
+
+    <div class="form-group">
+        <label for="HotelDistrict">Kecamatan:</label>
+        <input type="text" id="HotelDistrict" name="HotelDistrict" required>
+    </div>
+
+    <div class="form-group">
+        <label for="HotelCity">Kota:</label>
+        <input type="text" id="HotelCity" name="HotelCity" required>
+    </div>
+
+    <div class="form-group">
+        <label for="HotelProvince">Provinsi:</label>
+        <input type="text" id="HotelProvince" name="HotelProvince" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+</form>
+
+    
+
+{% endblock content %}

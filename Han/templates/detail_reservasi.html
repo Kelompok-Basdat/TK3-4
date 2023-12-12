@@ -5,6 +5,7 @@
     </style>
 {% endblock meta %}
 {% block content %}
+{% include 'nav-customer.html'%}
 <title>DETAIL RESERVASI</title>
 <div class="mainpnl centered container w-75 align-middle">
     <h1>DETAIL RESERVASI</h1>
@@ -13,28 +14,61 @@
         <tbody>
             <tr>
                 <th scope="row">ID Reservasi:</th>
-                <td class="text-center"></td>
+                <td class="text-center">{{detail_reservasi.rsv_id}}</td>
             </tr>
             <tr>
                 <th scope="row">Nomor Kamar:</th>
-                <td class="text-center"></td>
+                <td class="text-center">{{detail_reservasi.rnum}}</td>
             </tr>
             <tr>
                 <th scope="row">Nama Hotel:</th>
-                <td class="text-center"></td>
+                <td class="text-center">{{detail_reservasi.rhotelname}}</td>
             </tr>
             <tr>
                 <th scope="row">Cabang Hotel:</th>
-                <td class="text-center"></td>
+                <td class="text-center">{{detail_reservasi.rhotelbranch}}</td>
             </tr>
             <tr>
                 <th scope="row">Tanggal:</th>
-                <td class="text-center"></td>
+                <td class="text-center">{{detail_reservasi.datetime}}</td>
             </tr>
             <tr>
                 <th scope="row">Status:</th>
-                <td class="text-center"></td>
+                <td class="text-center">{{detail_reservasi.isactive}}</td>
             </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm">
+        <h2>SHUTTLE</h2>
+        <tbody>
+            {% if detail_shuttle %}
+            <tr>
+                <th scope="row">ID Reservasi:</th>
+                <td class="text-center">{{detail_shuttle.rsv_id}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nomor Kendaraan:</th>
+                <td class="text-center">{{detail_shuttle.vehicle_num}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nomor HP Driver:</th>
+                <td class="text-center">{{detail_shuttle.driver_phonenum}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Tanggal:</th>
+                <td class="text-center">{{detail_shuttle.datetime}}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <th scope="row">Tidak ada reservasi untuk shuttle pada reservasi ini</th>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <button onclick="location.href='{% url 'reservasi:add_shuttle' rsv_id %}';">Add Shuttle</button>
+                </th>
+            </tr>
+            {% endif %}
+            
         </tbody>
     </table>
 </div>

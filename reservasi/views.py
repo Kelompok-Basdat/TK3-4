@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 
-def add_shuttle(request):
+def add_shuttle(request, rsv_id):
     if 'user' not in request.session:
         return redirect('login:login')
     with conn.cursor() as cursor:
@@ -31,7 +31,7 @@ def add_shuttle(request):
         if not results:
             results = ["Mohon maaf, semua kendaraan sedang terpakai.",]
         # TODO: connect reservation idnya
-        rsv_id = '4235' # note: masih dummy
+        rsv_id = rsv_id # note: masih dummy
         context = {
             'kendaraan' : results,
             'rsv_id' : rsv_id,
@@ -69,12 +69,12 @@ def add_shuttle_submit(request):
 
     return HttpResponseNotFound()
 
-def add_complaint(request):
+def add_complaint(request, rsv_id):
     if 'user' not in request.session:
         return redirect('login:login')
     with conn.cursor() as cursor:
         # TODO: ngehubungin data aslinya
-        rsv_id = '4235' # masih data dummy
+        rsv_id = rsv_id
         cursor.execute("set search_path to sistel;")
         cursor.execute(
             """
@@ -127,7 +127,7 @@ def complaint_submit(request):
 
     return HttpResponseNotFound()
 
-def add_review(request):
+def add_review(request, hname, hbranch):
     if 'user' not in request.session:
         return redirect('login:login')
     # TODO: ngehubungin data aslinya
@@ -137,8 +137,8 @@ def add_review(request):
         cursor.execute('set search_path to sistel;')
         cursor.execute('select concat(fname, \' \', lname) from sistel.user where email = %s;', (email, ))
         nama = cursor.fetchone()[0]
-        hotel_name = 'Ibis' # masih data dummy
-        hotel_branch = 'Bandung' # masih data dummy
+        hotel_name = hname.title() # masih data dummy
+        hotel_branch = hbranch.title() # masih data dummy
         context = {
             'email' : email,
             'nama' : nama,

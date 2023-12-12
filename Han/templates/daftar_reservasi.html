@@ -5,6 +5,7 @@
     </style>
 {% endblock meta %}
 {% block content %}
+{% include 'nav-customer.html'%}
     <h1>Daftar Reservasi</h1>
 
     <table class="table table-striped p-2">
@@ -22,9 +23,9 @@
             <td>{{ info.datetime }}</td>
             <td>{{ info.status }}</td>
             <td>
-                <button>Detail Reservasi</button>
+                <button onclick="location.href='{% url 'Han:detail_reservasi' info.rid %}';">Detail Reservasi</button>
                 <button>Cancel Reservasi</button>
-                <button>Add Complaints</button>
+                <button onclick="location.href='{% url 'reservasi:add_complaint' info.rid %}';">Add Complaints</button>
             </td>
         </tr>
         {% endfor %}

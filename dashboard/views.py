@@ -1,9 +1,11 @@
 from django.db import connection as conn
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 # Create your views here.
 
 def show_dashboard(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     if 'hotel_name' in request.session:
         email = request.session['user']
         with conn.cursor() as cursor:
@@ -31,7 +33,6 @@ def show_dashboard(request):
                 'response' : response,
                 'rooms' : room,
             }
-        print(res)
         return render(request, 'dash_hotel.html', context)
     else:
         email = request.session['user']
@@ -47,5 +48,4 @@ def show_dashboard(request):
                 'email' : email,
                 'nik' : res[3],
             }
-        print(res)
         return render(request, 'dash_user.html', context)

@@ -1,11 +1,15 @@
-from django.shortcuts import render
+import json
+
 import psycopg2
 import psycopg2.extras
-import json
-from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseNotAllowed, HttpResponseRedirect,
+                         JsonResponse)
+from django.shortcuts import render
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
 
 def get_connection():
     return psycopg2.connect(
@@ -45,8 +49,9 @@ def daftar_reservasi(request):
             JOIN sistel.reservation_room as rr on r.rid = rr.rsv_id
             JOIN sistel.reservation_status_history as rsh on r.rid = rsh.rid 
             JOIN sistel.reservation_status as rs on rsh.rsid = rs.id
+            where r.cust_email = %s
             """
-    cur.execute(query)
+    cur.execute(query, (request.session['user'],))
     list_reservasi = cur.fetchall()
     context = {'reservasis': list_reservasi}
 
@@ -65,15 +70,23 @@ def create_kamar(request):
 
     return render(request, 'create_kamar.html', context)
 
-def detail_reservasi(request):
+def detail_reservasi(request, rsv_id):
 
     query=f"""
-            SELECT *
-            FROM sistel.room
+            SELECT rsv_id, rnum, rhotelname, rhotelbranch, datetime, isactive
+            FROM sistel.reservation_room
+            where rsv_id = %s
             """
-    cur.execute(query)
-    detail_reservasi = cur.fetchall()
-    context = {'detail_reservasi': detail_reservasi}
+    cur.execute(query, (rsv_id, ))
+    detail_reservasi = cur.fetchone()
+    query=f"""
+        SELECT rsv_id, vehicle_num, driver_phonenum, datetime, isactive
+        FROM sistel.reservation_shuttleservice
+        where rsv_id = %s and isactive = true;
+        """
+    cur.execute(query, (rsv_id, ))
+    detail_shuttle = cur.fetchone()
+    context = {'detail_reservasi': detail_reservasi, 'detail_shuttle':detail_shuttle, 'rsv_id' : rsv_id}
     print(detail_reservasi) #checker
 
     return render(request, 'detail_reservasi.html', context)

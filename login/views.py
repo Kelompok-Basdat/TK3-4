@@ -17,7 +17,7 @@ def show_landingpage(request):
 
 def login_user(request):
     if 'user' in request.session:
-        return redirect('reservasi:add_shuttle')
+        return redirect('dashboard:show_dashboard')
     return render(request, 'login.html', {})
 
 @csrf_exempt

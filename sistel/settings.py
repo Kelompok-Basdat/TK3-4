@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'reservasi',
     'hotel',
-    'Han'
+    'Han',
     'login',
     'cr_pengguna',
     'dashboard',

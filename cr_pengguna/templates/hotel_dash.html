@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #dashboard {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+        }
+
+        .info-item label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .facility-list,
+        .room-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .facility-list li,
+        .room-list li {
+            margin-bottom: 5px;
+        }
+
+        .room-sub-columns,
+        .facility-sub-columns {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .room-sub-columns div,
+        .facility-sub-columns div {
+            flex: 1;
+        }
+
+        .no-facilities {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="dashboard">
+        <h2>Hotel Dashboard</h2>
+
+        <div class="section">
+            <h3>Hotel Information</h3>
+
+            <div class="info-item">
+                <label>Nama Pemilik Hotel:</label>
+                <span>Dummy Data</span>
+            </div>
+
+            <div class="info-item">
+                <label>Nomor HP:</label>
+                <span>xxxxxxxxxxxx</span>
+            </div>
+
+            <div class="info-item">
+                <label>Email:</label>
+                <span>dummy.data@example.com</span>
+            </div>
+
+            <div class="info-item">
+                <label>Nomor Izin Usaha:</label>
+                <span>xxxxx</span>
+            </div>
+
+            <div class="info-item">
+                <label>Nama Hotel (Cabang):</label>
+                <span>Sebuah Hotel (Jakarta)</span>
+            </div>
+
+            <div class="info-item">
+                <label>Alamat Hotel:</label>
+                <span>Jalan Raya No. 10, Jakarta</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Hotel Facilities</h3>
+            
+            <ul class="facility-list">
+                <!-- Check if there are facilities -->
+                <!-- If yes, display them; if no, display "..." -->
+                
+                <!-- If no facilities, display "..." -->
+                <li class="no-facilities">
+                    <span>Tidak ada fasilitas</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Hotel Rooms</h3>
+            <div class="room-sub-columns">
+                <div>Nomor Kamar</div>
+                <div>Harga</div>
+                <div>Lantai</div>
+                
+            </div>
+            <ul class="room-list">
+                <li class="room-sub-columns">
+                    <div>101</div>
+                    <div>$100</div>
+                    <div>1st Floor</div>
+                    
+                </li>
+                <li class="room-sub-columns">
+                    <div>202</div>
+                    <div>$120</div>
+                    <div>2</div>
+                    
+                </li>
+                <li class="room-sub-columns">
+                    <div>303</div>
+                    <div>$150</div>
+                    <div>3</div>
+                    
+                </li>
+                <!-- Add more rooms as needed -->
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

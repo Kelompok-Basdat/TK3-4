@@ -15,7 +15,7 @@ def register(request):
 
         return HttpResponse(f'Registration successful for {role}')
 
-    return render(request, 'registration_form.html')
+    return render(request, 'form.html')
 
 
 

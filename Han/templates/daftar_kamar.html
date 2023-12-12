@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block meta %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+    </style>
+{% endblock meta %}
+{% block content %}
+    <h1>Kamar Hotel</h1>
+    <button>Tambah Kamar</button>
+    <h1>Daftar Kamar Hotel</h1>
+    <table class="table table-striped p-2">
+        <tr>
+            <th>Nomor Kamar</th>
+            <th>Harga</th>
+            <th>Lantai</th>
+            <th>Daftar Fasilititas</th>
+            <th>Action</th>
+        </tr>
+        {% for info in kamars %}
+        <tr>
+            <td>{{ info.number }}</td>
+            <td>{{ info.price }}</td>
+            <td>{{ info.floor }}</td>
+            <td>{{ info.status }}</td>
+            <td>
+                <button>Hapus Kamar</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

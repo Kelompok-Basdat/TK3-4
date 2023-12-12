@@ -82,7 +82,7 @@ def add_complaint(request):
     with get_connection() as conn:
         with conn.cursor() as cursor:
             # TODO: ngehubungin data aslinya
-            rsv_id = '4235' # masih data dummy
+            rsv_id = '4235' # masi h data dummy
             cursor.execute("set search_path to sistel;")
             cursor.execute(
                 """

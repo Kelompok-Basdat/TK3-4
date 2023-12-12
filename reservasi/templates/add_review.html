@@ -63,7 +63,9 @@
                     alert(data.message);
                 } else {
                     alert("Kamu berhasil membuat review!")
-                    document.getElementById("form").reset()
+                    this.form.reset()
+                    // TODO: window.location.href =
+                    location.reload()
                 }
             })
             return false

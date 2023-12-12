@@ -1,18 +1,15 @@
-CREATE OR REPLACE FUNCTION nama_function()
+CREATE OR REPLACE FUNCTION cek_password()
 RETURNs trigger AS
 $$
-DECLARE
-    nama_var1 type_var1;
-    nama_var2 type_var2;
 BEGIN
-    -- IF() THEN
-    --     RAISE EXCEPTION '';
-    -- END IF;
-    -- RETURN NEW;
+    IF(NOT(NEW.password ~ '[A-Za-z]' AND NEW.password ~ '[0-9]')) THEN
+        RAISE EXCEPTION 'Password harus terdiri dari kombinasi huruf dan angka!';
+    END IF;
+    RETURN NEW;
 END;
 $$
 language plpgsql;
 
-CREATE TRIGGER nama_trigger
-AFTER INSERT ON nama_tabel
-FOR EACH ROW EXECUTE PROCEDURE nama_function();
+CREATE TRIGGER trigger_cek_password
+AFTER INSERT ON sistel.user
+FOR EACH ROW EXECUTE PROCEDURE cek_password();

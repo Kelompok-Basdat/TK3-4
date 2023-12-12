@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<form id="customerRegistrationForm" action="register_customer.php" method="post">
+    <h2>Register - Customer</h2>
+
+    <label for="customerEmail">Email:</label>
+    <input type="email" id="customerEmail" name="customerEmail" required>
+
+    <label for="customerPassword">Password:</label>
+    <input type="password" id="customerPassword" name="customerPassword" required>
+
+    <label for="firstName">Nama Depan:</label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <label for="lastName">Nama Belakang:</label>
+    <input type="text" id="lastName" name="lastName" required>
+
+    <label for="phoneNumber">Nomor HP:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+    <label for="nik">NIK:</label>
+    <input type="text" id="nik" name="nik" required>
+
+    <button type="submit">Register</button>
+</form>
+
+</body>
+</html>

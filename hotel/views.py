@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def namedtuplefetchall(cursor):
+    if 'user' not in request.session:
+        return redirect('login:login')
     """Return all rows from a cursor as a namedtuple"""
     desc = cursor.description
     nt_result = namedtuple('Result', [col[0] for col in desc])
@@ -15,6 +17,8 @@ def namedtuplefetchall(cursor):
 
 
 def fasilitas_hotel(request, hotel_name:str, hotel_branch:str):
+    if 'user' not in request.session:
+        return redirect('login:login')
     hotel_name = hotel_name.title()
     hotel_branch = hotel_branch.title()
     with connection.cursor() as c:
@@ -32,13 +36,19 @@ def fasilitas_hotel(request, hotel_name:str, hotel_branch:str):
 
 # Create your views here.
 def find_hotel(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     return render(request, "search_hotel.html", {})
 
 def specific_hotel(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     return render(request, "specific_hotel.html", {})
 
 
 def create_fasilitas_hotel(request, hotel_name: str, hotel_branch:str):
+    if 'user' not in request.session:
+        return redirect('login:login')
     if request.method == "POST":
 
             facility = request.POST.get('facility_name')
@@ -55,7 +65,6 @@ def create_fasilitas_hotel(request, hotel_name: str, hotel_branch:str):
                     c.execute("""set search_path to public""")
                 return redirect(f'/hotel/fasilitas/{hotel_name}/{hotel_branch}')
             except Exception as e:
-                print(e)
                 return render(request, "create_fasilitas.html", {"message" : str(e).split('\n')[0]})
 
     return render(request, "create_fasilitas.html", {})
@@ -63,6 +72,8 @@ def create_fasilitas_hotel(request, hotel_name: str, hotel_branch:str):
 
 
 def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
+    if 'user' not in request.session:
+        return redirect('login:login')
     hotel_name = hotel_name.title()
     hotel_branch = hotel_branch.title()
     if request.method == "POST":
@@ -108,6 +119,8 @@ def update_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
     
 
 def delete_fasilitas_hotel(request, hotel_name, hotel_branch, facilities):
+    if 'user' not in request.session:
+        return redirect('login:login')
     hotel_branch = hotel_branch.title()
     hotel_name = hotel_name.title()
             

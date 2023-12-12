@@ -3,20 +3,13 @@ import datetime
 import psycopg2
 from django.db import connection as conn
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 
-def get_connection():
-    return psycopg2.connect(
-        dbname='railway',
-        user='postgres',
-        password='EcgcG5CGgE6b3B6B4EBaaGb-F16fddcb',
-        host='viaduct.proxy.rlwy.net',
-        port='57165'
-    )
-
 def add_shuttle(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     with conn.cursor() as cursor:
         cursor = conn.cursor()
         query = 'set search_path to sistel;'
@@ -48,6 +41,8 @@ def add_shuttle(request):
 
 @csrf_exempt
 def add_shuttle_submit(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     if request.method == 'POST':
         rsv_id = request.POST.get('rsv_id')
         vehicle_selected = request.POST.get('vehicle')
@@ -75,6 +70,8 @@ def add_shuttle_submit(request):
     return HttpResponseNotFound()
 
 def add_complaint(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     with conn.cursor() as cursor:
         # TODO: ngehubungin data aslinya
         rsv_id = '4235' # masih data dummy
@@ -103,6 +100,8 @@ def add_complaint(request):
 
 @csrf_exempt
 def complaint_submit(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     if request.method == 'POST':
         rsv_id = request.POST.get('rsv_id')
         email = request.POST.get('email')
@@ -129,6 +128,8 @@ def complaint_submit(request):
     return HttpResponseNotFound()
 
 def add_review(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     # TODO: ngehubungin data aslinya
     with conn.cursor() as cursor:
         cursor.execute('set search_path to public;')
@@ -148,6 +149,8 @@ def add_review(request):
 
 @csrf_exempt
 def review_submit(request):
+    if 'user' not in request.session:
+        return redirect('login:login')
     if request.method == 'POST':
         email = request.POST.get('email')
         nama = request.POST.get('nama')
